@@ -1,0 +1,62 @@
+//remotes {
+//    dev {
+//        host = 'ecom-dev.lpb.lv'
+//        user = project.property("username")
+//        agent = true
+//        knownHosts = allowAnyHosts
+//    }
+//    demo {
+//        host = 'ecom-demo.cards.lpb.lv'
+//        user = project.property("username")
+//        agent = true
+//    }
+//    prod {
+//        host = 'ecom-prod-back.cards.lpb.lv'
+//        user = project.property("username")
+//        agent = true
+//    }
+//}
+//
+//def control = [
+//        dev: 'http://ecom-dev.lpb.lv:4849/',
+//        demo: 'http://ecom-demo.cards.lpb.lv:4849/',
+//        prod: 'http://ecom-prod-front.cards.lpb.lv:4849/'
+//]
+//
+//remotes.each { server ->
+//    task("deploy-$server.name", dependsOn: build) << {
+//        ssh.run {
+//            println "\n" + "Connecting to $server.name server"
+//            session(server) {
+//                def fileName = "${parentProjectName}-" + version + '.ear'
+//                def asadmin = 'sudo -u ecom /opt/glassfish4/bin/asadmin --port 8048'
+//                def props = '--force --properties keepSessions=true --name ecom --virtualservers server-ecom'
+//
+//                println "Copying $fileName to /tmp folder"
+//                put "$buildDir/libs/$fileName", '/tmp'
+//
+//                println '[' + new Date() + '] Freezing frontend'
+//                println 'Redeploying application...'
+//                (control[server.name] + 'freeze').toURL().text
+//                execute(asadmin + ' deploy ' + props + ' /tmp/' + fileName, pty: true) { println it }
+//                println '[' + new Date() + '] Activating frontend'
+//                (control[server.name] + 'activate').toURL().text
+//            }
+//        }
+//    }
+//}
+
+//task("deploy-local", dependsOn: build) << {
+//    def fileName = "${parentProjectName}-" + version + '.ear'
+//    def asadmin = 'C:/Software/glassfish4/bin/asadmin.bat'
+//    def filePath = "$buildDir/libs/$fileName"
+//
+//    println 'Redeploying application...'
+//
+//    exec {
+//        executable asadmin
+//        args '--port', 8048, 'deploy', '--force', '--properties', 'keepSessions=true', '--name', 'ecom', '--virtualservers', 'server-ecom', filePath
+//    }
+//
+//    println 'Deployed application'
+//}

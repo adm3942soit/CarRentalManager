@@ -1,0 +1,20 @@
+CREATE TABLE `persons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(20) DEFAULT NULL,
+  `last_name` varchar(20) DEFAULT NULL,
+  `login` varchar(10) NOT NULL,
+  `password` varchar(10) DEFAULT NULL,
+  `picture` varchar(200) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `dateOfBirth` date DEFAULT NULL,
+  `updated` date DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `created` date DEFAULT NULL,
+  `remind` tinyint(1) DEFAULT '0',
+  `notes` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `persons_id_uindex` (`id`),
+  UNIQUE KEY `persons_login_uindex` (`login`),
+  UNIQUE KEY `persons_email_uindex` (`email`),
+  UNIQUE KEY `persons_picture_uindex` (`picture`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
