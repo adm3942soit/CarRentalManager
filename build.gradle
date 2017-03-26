@@ -89,6 +89,7 @@ project(':data') {
 }
 
 project(':ui') {
+   apply plugin: 'war'
    dependencies {
       provided project(':data')
       compile libs.vaadin
@@ -118,9 +119,9 @@ dependencies {
 }
 
 // Set version as commit number + hashcode
-ext.revision = 'git rev-list --count HEAD'.execute(null, projectDir).text.trim()
-ext.hash = 'git rev-parse --short HEAD'.execute(null, projectDir).text.trim()
-version = "r${revision}.${hash}"
+//ext.revision = 'git rev-list --count HEAD'.execute(null, projectDir).text.trim()
+//ext.hash = 'git rev-parse --short HEAD'.execute(null, projectDir).text.trim()
+//version = "r${revision}.${hash}"
 ext.parentProjectName = name
 
 ear {
