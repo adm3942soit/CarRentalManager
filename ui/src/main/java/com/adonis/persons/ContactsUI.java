@@ -29,7 +29,7 @@ public class ContactsUI extends UI {
 
 	HorizontalSplitPanel splitter = new HorizontalSplitPanel();
 	Grid grid = new Grid();
-	PersonView editor = new PersonView(this::savePerson, this::deletePerson);
+	com.adonis.persons.PersonView editor = new PersonView(this::savePerson, this::deletePerson);
 
 	@Inject
 	PersonService service;

@@ -1,0 +1,42 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="Gradle : CarRentalManager-r3.bb874e8.ear (exploded)">
+    <output-path>$PROJECT_DIR$/build/libs/exploded/CarRentalManager-r3.bb874e8.ear</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$">
+        <files>
+          <file path="$PROJECT_DIR$/build/libs/exploded/CarRentalManager-r3.bb874e8.ear/META-INF/application.xml" value="PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8YXBwbGljYXRpb24geG1sbnM9Imh0dHA6Ly9qYXZhLnN1bi5jb20veG1sL25zL2phdmFlZSINCiAgICAgICAgICAgICB4c2k6c2NoZW1hTG9jYXRpb249Imh0dHA6Ly9qYXZhLnN1bi5jb20veG1sL25zL2phdmFlZSBodHRwOi8vamF2YS5zdW4uY29tL3htbC9ucy9qYXZhZWUvYXBwbGljYXRpb25fNi54c2QiDQogICAgICAgICAgICAgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgdmVyc2lvbj0iNiI+DQogICAgPGRpc3BsYXktbmFtZT5jYXJSZW50YWxNYW5hZ2VyLWVhcjwvZGlzcGxheS1uYW1lPg0KICAgIDxtb2R1bGU+DQogICAgICAgIDx3ZWI+DQogICAgICAgICAgICA8d2ViLXVyaT51aS53YXI8L3dlYi11cmk+DQogICAgICAgICAgICA8Y29udGV4dC1yb290Pi91aTwvY29udGV4dC1yb290Pg0KICAgICAgICA8L3dlYj4NCiAgICA8L21vZHVsZT4NCiAgICA8bGlicmFyeS1kaXJlY3Rvcnk+bGliPC9saWJyYXJ5LWRpcmVjdG9yeT4NCjwvYXBwbGljYXRpb24+DQo=" />
+        </files>
+        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/build/libs/exploded/CarRentalManager-r3.bb874e8.ear/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="CarRentalManager_main/javaeeApplication/JavaEE Application Gradle : CarRentalManager-r3.bb874e8.ear" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/application" />
+      <element id="directory" name="ui.war">
+        <element id="artifact" artifact-name="Gradle : CarRentalManager : ui.war (exploded)" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/ma.glasnost.orika/orika-core/1.4.3/86eb67b33ba6b7dd6eeb3b228ae8e8b0513adc60/orika-core-1.4.3.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.4.2/f73ede4b0c3747626d83c713242f2286d3924366/jackson-jaxrs-json-provider-2.4.2.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.16.10/7bd6fc5b3fb7a77c710226ffaa785b404b620ba0/lombok-1.16.10.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/6.0.5/9d8df5a1f3273110f2a9ad304961bdd03d696d86/mysql-connector-java-6.0.5.jar" />
+        <element id="archive" name="CarRentalManager-data.jar">
+          <element id="module-output" name="data_main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/data/build/classes/main" />
+        </element>
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.16.1-GA/315891b371395271977af518d4db5cee1a0bc9bf/javassist-3.16.1-GA.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.thoughtworks.paranamer/paranamer/2.3/4a85963a752c0a2f715c3924bfc686865e7e1bc6/paranamer-2.3.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.2_jdk5/d49f4f513e7023ab567002e2a92eba29210ad87c/concurrentlinkedhashmap-lru-1.2_jdk5.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.4.2/304e6e60d495095bdae65f80462afc26d76dded4/jackson-jaxrs-base-2.4.2.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.4.2/ceb72830d95c512b4b300a38f29febc85bdf6e4b/jackson-core-2.4.2.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.4.2/8e31266a272ad25ac4c089734d93e8d811652c1f/jackson-databind-2.4.2.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.4.2/c2b2c9d52d90776f3186c5fc758de369dc46ce12/jackson-module-jaxb-annotations-2.4.2.jar" />
+        <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.4.0/d6a66c7a5f01cf500377bd669507a08cfeba882a/jackson-annotations-2.4.0.jar" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,35 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Gradle : CarRentalManager : ui.war (exploded)">
+    <output-path>$PROJECT_DIR$/ui/build/libs/exploded/ui.war</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$">
+        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/ui/build/libs/exploded/ui.war/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="ui_main/web/Web Gradle : ui.war" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ui_main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/ui/build/classes/main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="CarRentalManager-data.jar">
+            <element id="module-output" name="data_main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/data/build/classes/main" />
+          </element>
+          <element id="library" level="project" name="Gradle: org.projectlombok:lombok:1.16.10" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/vaadin/vaadin-cdi-1.0.3.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/vaadin/vaadin-server-7.7.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/vaadin/vaadin-client-compiled-7.7.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/vaadin/vaadin-push-7.7.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/vaadin/vaadin-themes-7.7.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/vaadin/vaadin-shared-7.5.2.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

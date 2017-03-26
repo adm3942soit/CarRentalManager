@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="ear" name="Gradle : CarRentalManager-r3.bb874e8.ear">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="CarRentalManager-r3.bb874e8.ear">
+      <element id="artifact" artifact-name="Gradle : CarRentalManager-r3.bb874e8.ear (exploded)" />
+    </root>
+  </artifact>
+</component>
