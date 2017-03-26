@@ -1,4 +1,8 @@
-plugins { id 'org.hidetake.ssh' version '1.0.5' }
+//plugins { id 'org.hidetake.ssh' version '1.0.5' }
+//apply from: 'http://plugins.jasoft.fi/vaadin.plugin'
+//plugins {
+//   id "fi.jasoft.plugin.vaadin" version "0.11"
+//}
 apply plugin: 'ear'
 
 def libs = [
@@ -16,6 +20,7 @@ def libs = [
         orika        : 'ma.glasnost.orika:orika-core:1.4.3',
 //        objectpool   : 'nf.fr.eraasoft:objectpool:1.1.3-SNAPSHOT',
         jackson      : 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.4.2',
+        vaadin       : fileTree(dir: 'lib/vaadin', include: '*.jar')
 //        quartz       : 'org.quartz-scheduler:quartz:2.2.3',
         // Maxmind
 //        maxmind      : 'com.maxmind.geoip2:geoip2:2.1.0',
@@ -24,7 +29,6 @@ def libs = [
         // Non-managed
 //        in3dsecure   : files('lib/in3dsecure.jar')
 ]
-
 allprojects {
 
    apply plugin: 'java'
@@ -32,9 +36,15 @@ allprojects {
    sourceCompatibility = '1.8'
    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-//   repositories {
-//      maven { url 'http://nebula.lpb.lv/nexus/content/groups/public/' }
+//   vaadin {
+//      version '7.7.7'
 //   }
+   repositories {
+      mavenCentral()
+      maven { url "http://maven.vaadin.com/vaadin-addons" }
+      maven { url "https://oss.sonatype.org/content/repositories/vaadin-snapshots/" }
+      maven { url "http://vaadin.com" }
+   }
 
    configurations {
       provided
@@ -60,7 +70,7 @@ allprojects {
       compile libs.lombok
       provided libs.slf4j
       provided libs.javaee
-//      provided libs.eclipselink
+      provided libs.eclipselink
       earCompile libs.guava
       earCompile(libs.orika) {
          exclude group: 'org.slf4j' // Provided by APP container
@@ -68,12 +78,12 @@ allprojects {
    }
 
 }
-
 project(':data') {
    dependencies {
 //      earCompile libs.objectpool
       earCompile libs.jackson
       compile libs.jackson
+      compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
       //warning: Cannot find annotation method 'shape()' in type 'JsonFormat': class file for com.fasterxml.jackson.annotation.JsonFormat not found
    }
 }
@@ -81,6 +91,12 @@ project(':data') {
 project(':ui') {
    dependencies {
       provided project(':data')
+      compile libs.vaadin
+//      compile group: 'com.vaadin', name: 'vaaadin-cdi', version: '1.0.3'
+//      compile group: 'com.vaadin', name: 'vaadin-server', version: '7.7.7'
+//      compile group: 'com.vaadin', name: 'vaadin-push', version: '7.7.7'
+//      compile group: 'com.vaadin', name: 'vaadin-client-compiled', version: '7.7.7'
+//      compile group: 'com.vaadin', name: 'vaadin-themes', version: '7.7.7'
 //      earCompile libs.maxmind
 //      earCompile libs.in3dsecure
 //      earCompile libs.elasticsearch
@@ -96,8 +112,8 @@ dependencies {
 // Add all ear modules
 ['ui'].each { module ->
    dependencies {
-      earlib project(path: ':ecom-' + module, configuration: 'earCompile')
-      deploy project(path: ':ecom-' + module, configuration: 'archives')
+      earlib project(path: ':' + module, configuration: 'earCompile')
+      deploy project(path: ':' + module, configuration: 'archives')
    }
 }
 
@@ -116,4 +132,4 @@ ear {
    }
 }
 
-apply from: 'deploy.gradle'
+//apply from: 'deploy.gradle'

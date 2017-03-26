@@ -1,0 +1,2 @@
+rootProject.name = 'CarRentalManager'
+include 'data', 'ui'
