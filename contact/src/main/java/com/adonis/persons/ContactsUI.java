@@ -12,6 +12,7 @@ import com.vaadin.ui.UI;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -50,7 +51,7 @@ public class ContactsUI extends UI {
 	@PostConstruct
 	void load() {
 		service.loadData();
-		service.loadDataFromDb();
+
 
 		grid.addSelectionListener(evt -> {
 			Person selectedItem = (Person) grid.getSelectedRow();
@@ -70,7 +71,8 @@ public class ContactsUI extends UI {
 	}
 
 	public void selectDefault() {
-		grid.select(grid.getContainerDataSource().getIdByIndex(0));
+		List<Person> persons = service.loadDataFromDb();
+		if(persons!=null && !persons.isEmpty())grid.select(grid.getContainerDataSource().getIdByIndex(0));
 	}
 
 	@Override

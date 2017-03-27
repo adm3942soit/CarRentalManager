@@ -1,6 +1,8 @@
 package com.adonis.person.backend;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -20,7 +22,7 @@ public class PersonRepository
         return em.createQuery("select p from Person p", Person.class).getResultList();
     }
 
-
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public Person saveAndFlush(Person person) {
         Person original = findById(person.getId());
         person.setId(original.getId());
@@ -29,7 +31,7 @@ public class PersonRepository
       return person;
     }
 
-
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void removeAndFlush(Person person) {
         em.remove(person);
     }

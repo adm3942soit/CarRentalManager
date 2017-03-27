@@ -4,6 +4,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,6 +44,7 @@ public class PersonService {
 	public List<Person> loadDataFromDb() {
 		return entryRepo.findAll();
 	}
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void loadData() {
 
 		String csvFile = "Persons.csv";
@@ -80,6 +83,7 @@ public class PersonService {
 					em.flush();
 				} catch (Exception e) {
 					log.error("Got Exception during LOAD DATA FROM CSV: "+e.toString());
+					return;
 				}
 
 			}
