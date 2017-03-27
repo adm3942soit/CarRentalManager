@@ -10,8 +10,6 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.Reindeer;
 
-import javax.inject.Inject;
-
 /**
  * Created by Oxana on 12.02.2017.
  */
@@ -26,10 +24,11 @@ public class SimpleLoginView extends CustomComponent implements View,
 
     private final Button loginButton;
 
-    @Inject
+//    @Inject
     protected PersonService personService;
 
-    public SimpleLoginView() {
+    public SimpleLoginView(PersonService personService) {
+        this.personService = personService;
         setSizeFull();
 
         // Create the user input field

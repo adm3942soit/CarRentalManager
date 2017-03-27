@@ -1,32 +1,32 @@
 package com.adonis.login;
 
 import com.adonis.person.backend.PersonService;
-import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.Theme;
+import com.vaadin.cdi.CDIUI;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.servlet.annotation.WebServlet;
 
 /**
  * Created by Oxana on 12.02.2017.
  */
+@Theme("mytheme")
+@CDIUI("")
 public class SimpleLoginUI extends UI {
-
-
 
     @Inject
     PersonService service;
 
-
+    SimpleLoginView view;
     @PostConstruct
     void load() {
         service.loadData();
         service.loadDataFromDb();
+        view = new SimpleLoginView(service);
 
     }
 
@@ -34,6 +34,7 @@ public class SimpleLoginUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
         //
         // Create a new instance of the navigator. The navigator will attach
         // itself automatically to this view.
@@ -43,7 +44,7 @@ public class SimpleLoginUI extends UI {
         //
         // The initial log view where the user can login to the application
         //
-        getNavigator().addView(SimpleLoginView.NAME, SimpleLoginView.class);//
+        getNavigator().addView(SimpleLoginView.NAME, view);//
 
         //
         // Add the main view of the application
@@ -86,8 +87,9 @@ public class SimpleLoginUI extends UI {
         });
     }
 
-    @WebServlet(urlPatterns = "/*", name = "SimpleLoginUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = SimpleLoginUI.class, productionMode = false)
-    public static class SimpleLoginUIServlet extends VaadinServlet {
-    }
+//    @WebServlet(urlPatterns = "/*", name = "SimpleLoginUIServlet", asyncSupported = true, initParams = {
+//            @WebInitParam(name = "UIProvider", value = "com.vaadin.cdi.CDIUIProvider")})
+//    @VaadinServletConfiguration(ui = SimpleLoginUI.class, productionMode = false)
+//    public static class SimpleLoginUIServlet extends VaadinCDIServlet {
+//    }
 }

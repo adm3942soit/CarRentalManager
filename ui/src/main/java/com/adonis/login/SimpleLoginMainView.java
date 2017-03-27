@@ -10,6 +10,7 @@ import com.vaadin.ui.Label;
 /**
  * Created by Oxana on 12.02.2017.
  */
+
 public class SimpleLoginMainView extends CustomComponent implements View {
 
     public static final String NAME = "";
