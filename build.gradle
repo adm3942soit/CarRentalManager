@@ -8,26 +8,15 @@ apply plugin: 'ear'
 def libs = [
         // Test
         junit        : 'junit:junit:4.11',
-
-        // Compile
         lombok       : 'org.projectlombok:lombok:1.16.10',
-        // Provided by container
         javaee       : 'javax:javaee-api:7.0',
         eclipselink  : 'org.eclipse.persistence:eclipselink:2.6.3',
         slf4j        : 'org.slf4j:slf4j-api:1.7.5',
-        // Included in project
         guava        : 'com.google.guava:guava:18.0',
         orika        : 'ma.glasnost.orika:orika-core:1.4.3',
-//        objectpool   : 'nf.fr.eraasoft:objectpool:1.1.3-SNAPSHOT',
         jackson      : 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.4.2',
+//        jersey       : fileTree(dir: 'lib/jersey', include: '*.jar'),
         vaadin       : fileTree(dir: 'lib/vaadin', include: '*.jar')
-//        quartz       : 'org.quartz-scheduler:quartz:2.2.3',
-        // Maxmind
-//        maxmind      : 'com.maxmind.geoip2:geoip2:2.1.0',
-        //elastic search
-//        elasticsearch: 'org.elasticsearch:elasticsearch:1.7.1',
-        // Non-managed
-//        in3dsecure   : files('lib/in3dsecure.jar')
 ]
 allprojects {
 
@@ -36,9 +25,6 @@ allprojects {
    sourceCompatibility = '1.8'
    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-//   vaadin {
-//      version '7.7.7'
-//   }
    repositories {
       mavenCentral()
       maven { url "http://maven.vaadin.com/vaadin-addons" }
@@ -50,7 +36,6 @@ allprojects {
       provided
       earCompile {
          transitive = true
-//         exclude module: 'google-http-client'
       }
    }
    sourceSets.all {
@@ -64,7 +49,6 @@ allprojects {
       }
    }
 
-   // Always include these dependencies
    dependencies {
       testCompile libs.junit
       compile libs.lombok
@@ -72,6 +56,7 @@ allprojects {
       provided libs.javaee
       provided libs.eclipselink
       earCompile libs.guava
+//      earCompile libs.jersey
       earCompile(libs.orika) {
          exclude group: 'org.slf4j' // Provided by APP container
       }
@@ -80,11 +65,9 @@ allprojects {
 }
 project(':data') {
    dependencies {
-//      earCompile libs.objectpool
       earCompile libs.jackson
       compile libs.jackson
       compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
-      //warning: Cannot find annotation method 'shape()' in type 'JsonFormat': class file for com.fasterxml.jackson.annotation.JsonFormat not found
    }
 }
 
@@ -104,13 +87,12 @@ project(':contact') {
 }
 
 
-dependencies {
-   earlib project(path: ':data', configuration: 'earCompile')
-   earlib project(':data')
-}
+//dependencies {
+//   earlib project(path: ':data', configuration: 'earCompile')
+//   earlib project(':data')
+//}
 
-// Add all ear modules
-['ui', 'contact'].each { module ->
+['data','ui', 'contact'].each { module ->
    dependencies {
       earlib project(path: ':' + module, configuration: 'earCompile')
       deploy project(path: ':' + module, configuration: 'archives')

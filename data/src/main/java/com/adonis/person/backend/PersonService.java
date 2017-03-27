@@ -1,27 +1,24 @@
 package com.adonis.person.backend;
 
 import lombok.NoArgsConstructor;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * EJB to hide JPA related stuff from the UI layer.
  */
 @Stateless
 @NoArgsConstructor
+@Slf4j
 public class PersonService {
 
 	@Inject
@@ -40,7 +37,6 @@ public class PersonService {
 	}
 
 	public void delete(Person entity) {
-		// Hibernate cannot remove detached, reattach...
 		entryRepo.removeAndFlush(entryRepo.findById(entity.getId()));
 	}
 	public List<Person> loadDataFromDb() {
@@ -78,8 +74,14 @@ public class PersonService {
 				entry.setPicture(person[5]);
 				entry.setNotes(person[6]);
                 entry.setCreated(new Date());
-				em.persist(entry);
-				em.flush();
+
+				try {
+					em.persist(entry);
+					em.flush();
+				} catch (Exception e) {
+					log.error("Got Exception during LOAD DATA FROM CSV: "+e.toString());
+				}
+
 			}
 
 		} catch (FileNotFoundException e) {

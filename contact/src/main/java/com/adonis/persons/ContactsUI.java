@@ -1,11 +1,7 @@
 package com.adonis.persons;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
 import com.adonis.person.backend.Person;
 import com.adonis.person.backend.PersonService;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
 import com.vaadin.data.util.BeanItemContainer;
@@ -13,6 +9,9 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.UI;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -50,6 +49,7 @@ public class ContactsUI extends UI {
 
 	@PostConstruct
 	void load() {
+		service.loadData();
 		service.loadDataFromDb();
 
 		grid.addSelectionListener(evt -> {
@@ -65,13 +65,6 @@ public class ContactsUI extends UI {
 		grid.setContainerDataSource(container);
 
 		grid.setColumns("firstName","lastName","email", "login", "password");
-		// Can also be:
-		// grid.removeColumn("id");
-		// grid.removeColumn("notes");
-		// grid.removeColumn("dateOfBirth");
-		// grid.removeColumn("picture");
-		// grid.removeColumn("remind");
-		// grid.setColumnOrder("firstName", "lastName", "email");
 
 		selectDefault();
 	}

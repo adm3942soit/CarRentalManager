@@ -1,16 +1,12 @@
-package com.adonis.car.manager;
+package com.adonis.login;
 
-import com.adonis.car.manager.login.SimpleLoginMainView;
-import com.adonis.car.manager.login.SimpleLoginView;
 import com.adonis.person.backend.PersonService;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
-
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -29,6 +25,7 @@ public class SimpleLoginUI extends UI {
 
     @PostConstruct
     void load() {
+        service.loadData();
         service.loadDataFromDb();
 
     }

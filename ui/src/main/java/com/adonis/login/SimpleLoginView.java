@@ -1,4 +1,4 @@
-package com.adonis.car.manager.login;
+package com.adonis.login;
 
 import com.adonis.person.backend.Person;
 import com.adonis.person.backend.PersonService;

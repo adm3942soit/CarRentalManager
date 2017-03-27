@@ -1,4 +1,4 @@
-package com.adonis.car.manager.login;
+package com.adonis.login;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
