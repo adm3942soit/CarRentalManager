@@ -6,7 +6,7 @@
         For production deployment you'll want to configure data source in your 
         app server and poin it to your database. -->
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>carManager</jta-data-source>
+        <jta-data-source>java:/carManager</jta-data-source>
         <class>com.adonis.person.backend.Person</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

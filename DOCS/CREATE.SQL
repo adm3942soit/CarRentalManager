@@ -1,4 +1,4 @@
-CREATE TABLE `persons` (
+CREATE TABLE `com.adonis.persons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(20) DEFAULT NULL,
   `last_name` varchar(20) DEFAULT NULL,

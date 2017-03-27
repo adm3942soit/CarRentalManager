@@ -93,14 +93,13 @@ project(':ui') {
    dependencies {
       provided project(':data')
       compile libs.vaadin
-//      compile group: 'com.vaadin', name: 'vaaadin-cdi', version: '1.0.3'
-//      compile group: 'com.vaadin', name: 'vaadin-server', version: '7.7.7'
-//      compile group: 'com.vaadin', name: 'vaadin-push', version: '7.7.7'
-//      compile group: 'com.vaadin', name: 'vaadin-client-compiled', version: '7.7.7'
-//      compile group: 'com.vaadin', name: 'vaadin-themes', version: '7.7.7'
-//      earCompile libs.maxmind
-//      earCompile libs.in3dsecure
-//      earCompile libs.elasticsearch
+   }
+}
+project(':contact') {
+   apply plugin: 'war'
+   dependencies {
+      provided project(':data')
+      compile libs.vaadin
    }
 }
 
@@ -111,7 +110,7 @@ dependencies {
 }
 
 // Add all ear modules
-['ui'].each { module ->
+['ui', 'contact'].each { module ->
    dependencies {
       earlib project(path: ':' + module, configuration: 'earCompile')
       deploy project(path: ':' + module, configuration: 'archives')
@@ -127,7 +126,7 @@ ext.parentProjectName = name
 ear {
    deploymentDescriptor {
       displayName = 'carRentalManager-ear'
-      ['ui'].each { module ->
+      ['ui', 'contact'].each { module ->
          webModule(module + '.war', '/' + module)
       }
    }
