@@ -3,7 +3,6 @@ package com.adonis.authentication;
 import com.adonis.person.backend.PersonService;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.Page;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -60,11 +59,11 @@ public class LoginScreen extends CssLayout {
         loginForm.setMargin(false);
 
         loginForm.addComponent(username = new TextField("Username", "admin"));
-        username.setWidth(15, Unit.EM);
+        username.setWidth(15);
         loginForm.addComponent(password = new PasswordField("Password"));
 
-        password.setWidth(15, Unit.EM);
-        password.addValidator(new PasswordValidator(personService, username.getValue()));
+        password.setWidth(15);
+        password.addValidator(new PasswordValidator(personService, (String)username.getValue()));
         password.setDescription("Write anything");
         CssLayout buttons = new CssLayout();
         buttons.setStyleName("buttons");
@@ -72,7 +71,7 @@ public class LoginScreen extends CssLayout {
 
         buttons.addComponent(login = new Button("Login"));
         login.setDisableOnClick(true);
-        login.addClickListener(new Button.ClickListener() {
+        login.addListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 try {
@@ -86,7 +85,7 @@ public class LoginScreen extends CssLayout {
         login.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
         buttons.addComponent(forgotPassword = new Button("Forgot password?"));
-        forgotPassword.addClickListener(new Button.ClickListener() {
+        forgotPassword.addListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 showNotification(new Notification("Hint: Try anything"));
@@ -101,14 +100,14 @@ public class LoginScreen extends CssLayout {
         loginInformation.setStyleName("login-information");
         Label loginInfoText = new Label(
                 "<h1>Login Information</h1>"
-                        + "Log in as &quot;admin&quot; to have full access. Log in with any other username to have read-only access. For all users, any password is fine",
-                ContentMode.HTML);
+                        + "Log in as &quot;admin&quot; to have full access. Log in with any other username to have read-only access. For all users, any password is fine"
+                );
         loginInformation.addComponent(loginInfoText);
         return loginInformation;
     }
 
     private void login() {
-        if (accessControl.signIn(username.getValue(), password.getValue())) {
+        if (accessControl.signIn((String) username.getValue(), (String)password.getValue())) {
             loginListener.loginSuccessful();
         } else {
             showNotification(new Notification("Login failed",

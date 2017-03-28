@@ -1,5 +1,7 @@
 package com.adonis.main;
 
+import com.adonis.person.backend.Person;
+import com.adonis.person.backend.PersonService;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.*;
@@ -9,6 +11,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
+import org.vaadin.crudui.crud.impl.GridBasedCrudComponent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,15 +30,15 @@ public class Menu extends CssLayout {
     private CssLayout menuItemsLayout;
     private CssLayout menuPart;
 
-    public Menu(Navigator navigator) {
+    public Menu(PersonService personService, Navigator navigator) {
         this.navigator = navigator;
-        setPrimaryStyleName(ValoTheme.MENU_ROOT);
+//        setPrimaryStyleName(ValoTheme.MENU_ROOT);
         menuPart = new CssLayout();
         menuPart.addStyleName(ValoTheme.MENU_PART);
 
         // header of the menu
         final HorizontalLayout top = new HorizontalLayout();
-        top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
+//        top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
         top.addStyleName(ValoTheme.MENU_TITLE);
         top.setSpacing(true);
         Label title = new Label("My CRUD");
@@ -49,7 +52,7 @@ public class Menu extends CssLayout {
 
         // logout menu item
         MenuBar logoutMenu = new MenuBar();
-        logoutMenu.addItem("Logout", FontAwesome.SIGN_OUT, new Command() {
+        logoutMenu.addItem("Logout",  new Command() {
 
             @Override
             public void menuSelected(MenuItem selectedItem) {
@@ -60,6 +63,27 @@ public class Menu extends CssLayout {
 
         logoutMenu.addStyleName("user-menu");
         menuPart.addComponent(logoutMenu);
+
+        // dataBase menu item
+        MenuBar dataMenu = new MenuBar();
+        dataMenu.addItem("Data",  new Command() {
+
+            @Override
+            public void menuSelected(MenuItem selectedItem) {
+                addComponent(menuPart);
+                GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class);
+                crud.setAddOperation(person ->personService.save(person));
+                crud.setUpdateOperation(person ->personService.save(person));
+                crud.setDeleteOperation(person ->personService.delete(person));
+                crud.setFindAllOperation(personService::getEntries);
+                addComponent(crud);
+//                VaadinSession.getCurrent().getSession().invalidate();
+//                Page.getCurrent().reload();
+            }
+        });
+
+        dataMenu.addStyleName("user-menu");
+        menuPart.addComponent(dataMenu);
 
         // button for toggling the visibility of the menu when on a small screen
         final Button showMenu = new Button("Menu", new ClickListener() {
@@ -75,12 +99,12 @@ public class Menu extends CssLayout {
         showMenu.addStyleName(ValoTheme.BUTTON_PRIMARY);
         showMenu.addStyleName(ValoTheme.BUTTON_SMALL);
         showMenu.addStyleName(VALO_MENU_TOGGLE);
-        showMenu.setIcon(FontAwesome.NAVICON);
+//        showMenu.setIcon(FontAwesome.NAVICON);
         menuPart.addComponent(showMenu);
 
         // container for the navigation buttons, which are added by addView()
         menuItemsLayout = new CssLayout();
-        menuItemsLayout.setPrimaryStyleName(VALO_MENUITEMS);
+//        menuItemsLayout.setPrimaryStyleName(VALO_MENUITEMS);
         menuPart.addComponent(menuItemsLayout);
 
         addComponent(menuPart);
@@ -102,7 +126,7 @@ public class Menu extends CssLayout {
      *            view icon in the menu
      */
     public void addView(View view, final String name, String caption,
-            Resource icon) {
+            com.vaadin.terminal.Resource icon) {
         navigator.addView(name, view);
         createViewButton(name, caption, icon);
     }
@@ -123,13 +147,13 @@ public class Menu extends CssLayout {
      *            view icon in the menu
      */
     public void addView(Class<? extends View> viewClass, final String name,
-            String caption, Resource icon) {
+            String caption, com.vaadin.terminal.Resource icon) {
         navigator.addView(name, viewClass);
         createViewButton(name, caption, icon);
     }
 
     private void createViewButton(final String name, String caption,
-            Resource icon) {
+            com.vaadin.terminal.Resource icon) {
         Button button = new Button(caption, new ClickListener() {
 
             @Override
@@ -138,7 +162,7 @@ public class Menu extends CssLayout {
 
             }
         });
-        button.setPrimaryStyleName(ValoTheme.MENU_ITEM);
+//        button.setPrimaryStyleName(ValoTheme.MENU_ITEM);
         button.setIcon(icon);
         menuItemsLayout.addComponent(button);
         viewButtons.put(name, button);

@@ -4,7 +4,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.Version;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.Label;
@@ -23,7 +22,7 @@ public class AboutView extends VerticalLayout implements View {
         aboutContent.addComponent(
                 new Label(FontAwesome.INFO_CIRCLE.getHtml()
                         + " This application is using Vaadin "
-                        + Version.getFullVersion(), ContentMode.HTML), "info");
+                        + Version.getFullVersion()), "info");
 
         setSizeFull();
         setStyleName("about-view");

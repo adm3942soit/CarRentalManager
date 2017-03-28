@@ -6,25 +6,32 @@ import com.adonis.authentication.LoginScreen;
 import com.adonis.main.MainScreen;
 import com.adonis.person.backend.PersonService;
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.Viewport;
 import com.vaadin.cdi.CDIUI;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 /**
  * Created by oksdud on 28.03.2017.
  */
-@Viewport("user-scalable=no,initial-scale=1.0")
+//@Viewport("user-scalable=no,initial-scale=1.0")
 @Theme("mytheme")
 @CDIUI("")
 public class LoginUI extends UI {
     @Inject
-    PersonService personService;
+    public PersonService personService;
+
     private AccessControl accessControl = new BasicAccessControl();
+
+    @PostConstruct
+    void load() {
+        personService.loadData();
+        personService.loadDataFromDb();
+    }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -55,6 +62,11 @@ public class LoginUI extends UI {
 
     public AccessControl getAccessControl() {
         return accessControl;
+    }
+
+    @Override
+    public void markAsDirty() {
+
     }
 
 //    @WebServlet(urlPatterns = "/*", name = "LoginUIServlet", asyncSupported = true)

@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -68,11 +67,11 @@ public class PersonService {
 				entry.setLastName(person[2]);
 				entry.setEmail(person[3]);
 				//entry.setLogin(person[4]);
-				try {
-					entry.setDateOfBirth(sdf.parse(person[4]));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					entry.setDateOfBirth(sdf.parse(person[4]));
+//				} catch (ParseException e) {
+//					e.printStackTrace();
+//				}
 				entry.setRemind(Math.random() > 0.5);
 				entry.setPicture(person[5]);
 				entry.setNotes(person[6]);
@@ -104,6 +103,5 @@ public class PersonService {
 	}
     public Person findByLogin(String login){
 		return entryRepo.findByLogin(login);
-
 	}
 }

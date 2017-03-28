@@ -5,7 +5,6 @@ import com.adonis.login.LoginUI;
 import com.adonis.view.about.AboutView;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 
@@ -27,11 +26,10 @@ public class MainScreen extends HorizontalLayout {
 
         final Navigator navigator = new Navigator(ui, viewContainer);
         navigator.setErrorView(ErrorView.class);
-        menu = new Menu(navigator);
+        menu = new Menu(ui.personService, navigator);
 //        menu.addView(new SampleCrudView(), SampleCrudView.VIEW_NAME,
 //                SampleCrudView.VIEW_NAME, FontAwesome.EDIT);
-        menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
-                FontAwesome.INFO_CIRCLE);
+        menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME, null);
 
         navigator.addViewChangeListener(viewChangeListener);
 
