@@ -1,5 +1,9 @@
 package com.adonis.authentication;
 
+import com.adonis.person.backend.PersonService;
+
+import javax.inject.Inject;
+
 /**
  * Default mock implementation of {@link AccessControl}. This implementation
  * accepts any string as a password, and considers the user "admin" as the only
@@ -12,7 +16,7 @@ public class BasicAccessControl implements AccessControl {
         if (username == null || username.isEmpty())
             return false;
 
-        CurrentUser.set(username);
+//        CurrentUser.set(username);
         return true;
     }
 
@@ -36,5 +40,6 @@ public class BasicAccessControl implements AccessControl {
     public String getPrincipalName() {
         return CurrentUser.get();
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.adonis.authentication;
 
+import com.adonis.person.backend.PersonService;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.Page;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -19,10 +20,12 @@ public class LoginScreen extends CssLayout {
     private Button forgotPassword;
     private LoginListener loginListener;
     private AccessControl accessControl;
+    private PersonService personService;
 
-    public LoginScreen(AccessControl accessControl, LoginListener loginListener) {
+    public LoginScreen(PersonService personService, AccessControl accessControl, LoginListener loginListener) {
         this.loginListener = loginListener;
         this.accessControl = accessControl;
+        this.personService = personService;
         buildUI();
         username.focus();
     }
@@ -59,7 +62,9 @@ public class LoginScreen extends CssLayout {
         loginForm.addComponent(username = new TextField("Username", "admin"));
         username.setWidth(15, Unit.EM);
         loginForm.addComponent(password = new PasswordField("Password"));
+
         password.setWidth(15, Unit.EM);
+        password.addValidator(new PasswordValidator(personService, username.getValue()));
         password.setDescription("Write anything");
         CssLayout buttons = new CssLayout();
         buttons.setStyleName("buttons");
