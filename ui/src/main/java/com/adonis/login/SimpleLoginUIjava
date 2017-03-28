@@ -6,6 +6,7 @@ import com.vaadin.cdi.CDIUI;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.UI;
 
 import javax.annotation.PostConstruct;
@@ -44,6 +45,8 @@ public class SimpleLoginUI extends UI {
         //
         // The initial log view where the user can login to the application
         //
+        final LoginForm loginForm = new LoginForm();
+
         getNavigator().addView(SimpleLoginView.NAME, view);//
 
         //
