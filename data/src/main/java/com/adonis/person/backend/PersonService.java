@@ -20,6 +20,7 @@ import java.util.List;
 @Stateless
 @NoArgsConstructor
 @Slf4j
+//@UIScoped
 public class PersonService {
 
 	@Inject
@@ -43,6 +44,7 @@ public class PersonService {
 	public List<Person> loadDataFromDb() {
 		return entryRepo.findAll();
 	}
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void loadData() {
 

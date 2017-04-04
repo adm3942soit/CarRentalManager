@@ -1,5 +1,6 @@
 package com.adonis.view.about;
 
+import com.vaadin.cdi.CDIView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
@@ -9,6 +10,7 @@ import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+@CDIView("about")
 public class AboutView extends VerticalLayout implements View {
 
     public static final String VIEW_NAME = "About";

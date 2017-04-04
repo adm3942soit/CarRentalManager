@@ -13,6 +13,7 @@ def libs = [
         cdi          : 'javax.enterprise:cdi-api:1.2',
 //        jersey       : fileTree(dir: 'lib/jersey', include: '*.jar'),
         vaadin       : fileTree(dir: 'lib/vaadin', include: '*.jar'),
+        login: fileTree(dir: 'lib/login', include: '*.jar'),
         main       : fileTree(dir: 'lib/main', include: '*.jar')
 ]
 allprojects {
@@ -27,6 +28,7 @@ allprojects {
       maven { url "http://maven.vaadin.com/vaadin-addons" }
       maven { url "https://oss.sonatype.org/content/repositories/vaadin-snapshots/" }
       maven { url "http://vaadin.com" }
+      maven { url "https://repo1.maven.org/maven2/" }
    }
 
    configurations {
@@ -53,8 +55,9 @@ allprojects {
       provided libs.javaee
       provided libs.eclipselink
       earCompile libs.guava
-//      earCompile libs.cdi
-//      earCompile libs.jersey
+      earCompile libs.cdi
+      compile libs.vaadin
+      earCompile libs.login
       earCompile(libs.orika) {
          exclude group: 'org.slf4j' // Provided by APP container
       }
@@ -73,17 +76,14 @@ project(':ui') {
    apply plugin: 'war'
    dependencies {
       provided project(':data')
-//      compile libs.vaadin
-      compile libs.main
-      compile group :'javax.servlet', name:'javax.servlet-api', version:'3.0.1'
+//      compile group :'javax.servlet', name:'javax.servlet-api', version:'3.0.1'
    }
 }
 project(':contact') {
    apply plugin: 'war'
    dependencies {
       provided project(':data')
-      compile libs.vaadin
-      compile group :'javax.servlet', name:'javax.servlet-api', version:'3.0.1'
+//      compile group :'javax.servlet', name:'javax.servlet-api', version:'3.0.1'
    }
 }
 

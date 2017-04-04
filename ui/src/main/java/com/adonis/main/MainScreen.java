@@ -7,12 +7,15 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
+import lombok.NoArgsConstructor;
 
 /**
  * Content of the UI when the user is logged in.
  * 
  * 
  */
+
+@NoArgsConstructor
 public class MainScreen extends HorizontalLayout {
     private Menu menu;
 

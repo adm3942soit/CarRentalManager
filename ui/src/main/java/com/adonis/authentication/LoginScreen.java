@@ -59,10 +59,10 @@ public class LoginScreen extends CssLayout {
         loginForm.setMargin(false);
 
         loginForm.addComponent(username = new TextField("Username", "admin"));
-        username.setWidth(15);
+        username.setWidth(String.valueOf(15));
         loginForm.addComponent(password = new PasswordField("Password"));
 
-        password.setWidth(15);
+        password.setWidth(String.valueOf(15));
         password.addValidator(new PasswordValidator(personService, (String)username.getValue()));
         password.setDescription("Write anything");
         CssLayout buttons = new CssLayout();

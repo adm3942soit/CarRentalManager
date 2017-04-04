@@ -7,7 +7,7 @@ import com.vaadin.data.validator.AbstractValidator;
 /**
  * Created by oksdud on 28.03.2017.
  */
-public class PasswordValidator extends AbstractValidator {
+public class PasswordValidator extends AbstractValidator<String> {
         String userName;
         PersonService personService;
 
@@ -34,5 +34,26 @@ public class PasswordValidator extends AbstractValidator {
 
             return false;
         }
+
+    @Override
+    protected boolean isValidValue(String value) {
+        if (value != null
+                && (((String)value).length() < 8 || !((String)value).matches(".*\\d.*"))) {
+            return false;
+        }
+
+        Person person  =  personService.findByLogin(this.userName);
+
+        if (person==null) return false;
+
+        if(person.getPassword().equals(value)) return true;
+
+        return false;
+    }
+
+    @Override
+    public Class<String> getType() {
+        return String.class;
+    }
 
 }

@@ -1,17 +1,18 @@
 package com.adonis.main;
 
-import com.adonis.person.backend.Person;
 import com.adonis.person.backend.PersonService;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
-import com.vaadin.server.*;
+import com.vaadin.server.Page;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
-import org.vaadin.crudui.crud.impl.GridBasedCrudComponent;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import java.util.Map;
 /**
  * Responsive navigation menu presenting a list of available views to the user.
  */
+@NoArgsConstructor
 public class Menu extends CssLayout {
 
     private static final String VALO_MENUITEMS = "valo-menuitems";
@@ -71,12 +73,12 @@ public class Menu extends CssLayout {
             @Override
             public void menuSelected(MenuItem selectedItem) {
                 addComponent(menuPart);
-                GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class);
-                crud.setAddOperation(person ->personService.save(person));
-                crud.setUpdateOperation(person ->personService.save(person));
-                crud.setDeleteOperation(person ->personService.delete(person));
-                crud.setFindAllOperation(personService::getEntries);
-                addComponent(crud);
+//                GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class);
+//                crud.setAddOperation(person ->personService.save(person));
+//                crud.setUpdateOperation(person ->personService.save(person));
+//                crud.setDeleteOperation(person ->personService.delete(person));
+//                crud.setFindAllOperation(personService::getEntries);
+//                addComponent(crud);
 //                VaadinSession.getCurrent().getSession().invalidate();
 //                Page.getCurrent().reload();
             }
@@ -126,7 +128,7 @@ public class Menu extends CssLayout {
      *            view icon in the menu
      */
     public void addView(View view, final String name, String caption,
-            com.vaadin.terminal.Resource icon) {
+            com.vaadin.server.Resource icon) {
         navigator.addView(name, view);
         createViewButton(name, caption, icon);
     }
@@ -147,13 +149,13 @@ public class Menu extends CssLayout {
      *            view icon in the menu
      */
     public void addView(Class<? extends View> viewClass, final String name,
-            String caption, com.vaadin.terminal.Resource icon) {
+            String caption, com.vaadin.server.Resource icon) {
         navigator.addView(name, viewClass);
         createViewButton(name, caption, icon);
     }
 
     private void createViewButton(final String name, String caption,
-            com.vaadin.terminal.Resource icon) {
+            com.vaadin.server.Resource icon) {
         Button button = new Button(caption, new ClickListener() {
 
             @Override
